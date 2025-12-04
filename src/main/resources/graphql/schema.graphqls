@@ -1,0 +1,53 @@
+type User {
+    id: ID!
+    username: String!
+    email: String!
+    enabled: Boolean!
+    profile: UserProfile
+}
+
+input UserInput {
+    id: ID
+    username: String!
+    email: String!
+    password: String!
+    enabled: Boolean
+}
+
+type UserProfile {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    phone: String
+    address: String
+    userId: ID!
+}
+
+input UserProfileInput {
+    firstName: String!
+    lastName: String!
+    phone: String
+    address: String
+    userId: ID!
+}
+
+type Query {
+    getAllUsers: [User!]!
+    getUserById(id: ID!): User
+    getUserByEmail(email: String!): User
+    getUserProfileById(id: ID!): UserProfile
+    getUserProfileByUserId(userId: ID!): UserProfile
+}
+
+type Mutation {
+    createUser(userDTO: UserInput!): User
+    updateUser(id: ID!, userDTO: UserInput!): User
+    deleteUser(id: ID!): Boolean
+    toggleUserStatus(id: ID!): Boolean
+    createUserProfile(profileDTO: UserProfileInput!): UserProfile
+    updateUserProfile(id: ID!, profileDTO: UserProfileInput!): UserProfile
+    deleteUserProfile(id: ID!): Boolean
+}
+
+
+
